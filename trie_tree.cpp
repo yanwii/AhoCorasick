@@ -8,69 +8,66 @@
 using namespace std;
 
 
-void TrieTree::add_words(vector<string> &words){
-    for (int i=0; i<words.size(); i++){
-        try {
-            string seg = words[i];
-            vector<string> segment = cut(seg);
-            
-            reverse(segment.begin(), segment.end());
-            
-            Node* root = proot;
-            string tmp = "";
-            for (int i=0; i<segment.size(); i++){
-                string word = segment[i];
-                tmp += segment[i];
-                if (root->child[word]==NULL){
-                    node_nums++;
-                    index ++;
-                    root->child[word] = new Node();
-                    root->child[word]->word = word;
-                    root->child[word]->state = index;
-                    root->child[word]->depth = i+1;
-                };
-                root = root->child[word];
-                /*
-                string depth_seg = word + "_" + to_string(i+1);
+void TrieTree::add_words(vector<string> &words, bool if_reverse){
+    /*
+    Add words to Trie Tree
 
-                if (depth_to_node[depth_seg]==NULL){
-                    node_nums++;
-                    index ++;
-                    root->child[word] = new Node();
-                    root->child[word]->word = word;
-                    root->child[word]->state = index;
-                    root->child[word]->depth = i+1;
-                    depth_to_node[depth_seg] = root;
-                }
-                root = depth_to_node[depth_seg];
-                */
-
-            }
-            root->is_end = true;
-            root->segment = tmp;
-            cout << float(i) /words.size()*100 << endl;
+    args:
+        words     :  vector<string> 
+                     like {"she", "he"}
+        if_reverse:  bool
+                     if reverse the segment
+    */
+    vector<string> seg;
+    for (int i=0; i < words.size(); i++){
+        try{
+            seg = cut(words[i], if_reverse);
+            add_word(seg);
         } catch (exception &e){
             continue;
         }
     }
-    cout << "node nums: " << node_nums << endl;
+}
+
+
+void TrieTree::add_word(vector<string> &words){
+    /*
+    Add word to Trie Tree
+
+    args:
+        words:      vector<string>;
+                    like {"s", "h", "s"}
+        if_reverse: bool;
+                    if reverse the segment
+    */
+    try {
+        //root node
+        Node* root = proot; 
+        string tmp = "";
+
+        //reverse
+        for (int i=0; i<words.size(); i++){
+            string word = words[i];
+            tmp += words[i];
+            // check if the node exist
+            if (root->child[word]==NULL){
+                // if not exist
+                // add new node
+                node_nums++;
+                root->child[word] = new Node();
+                root->child[word]->word = word;
+                root->child[word]->state = node_nums;
+                root->child[word]->depth = i+1;
+            };
+            // goto child node
+            root = root->child[word];
+        }
+        root->is_end = true;
+        root->segment = tmp;
+    } catch (exception &e){}
 };
 
 
 
 
-void TrieTree::prefix_search(string &text){
-    vector<string> cut_text = cut(text);
-    Node* root = proot;
-    for (int i=0; i < cut_text.size(); i++){
-        string seg = cut_text[i];
-        if (root->child[seg]==0){
-            break;
-        }
-        if (root->child[seg]->is_end){
-            cout << root->child[seg]->segment << endl;
-        }
-        root = root->child[seg];
-    }
-};
 

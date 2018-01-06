@@ -5,7 +5,6 @@
 #include <vector>
 using namespace std;
 
-vector<vector<string>> cut(vector<string>);
-vector<string> cut(const string &word);
+vector<string> cut(const string &word, bool);
 vector<string> read_file(string);
 #endif

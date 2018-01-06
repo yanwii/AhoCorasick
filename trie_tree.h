@@ -23,11 +23,9 @@ class TrieTree{
     }
     Node* proot;
     int node_nums=0;
-    unordered_map <string, Node*> depth_to_node;
-    int index=0;
     public:
-    void add_words(vector<string> &word);
-    void prefix_search(string &text);
+    void add_words(vector<string> &word, bool);
+    void add_word(vector<string> &word);
 };
 
 

@@ -1,24 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 #include "utils.h"
 using namespace std;
 
-vector<vector<string>> cut(vector<string> keywords){
-    vector<vector<string>> result;
-    for (string word:keywords){
-        try{
-            vector<string> cut_word = cut(word);
-            result.push_back(cut_word);
-        } catch (exception& e){
-            continue;        
-        }
-    }
-    return result;
-};
 
-vector<string> cut(const string &word){
-    vector<string> segements;
+vector<string> cut(const string &word, bool if_reverse=false){
+    vector<string> segments;
     string tmp = "";
     for (int i=0; i < word.size(); i++){
         if(word.at(i) <= -1){
@@ -28,13 +17,16 @@ vector<string> cut(const string &word){
             tmp += word.at(i);
             i++;
             tmp += word.at(i);
-            segements.push_back(tmp);
+            segments.push_back(tmp);
         } else {
             tmp = word.at(i);
-            segements.push_back(tmp);
+            segments.push_back(tmp);
         }
     }
-    return segements;
+    if (if_reverse){
+        reverse(segments.begin(), segments.end());
+    }
+    return segments;
 }
 
 vector<string> read_file(string file_name){
