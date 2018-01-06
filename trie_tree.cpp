@@ -8,20 +8,20 @@
 using namespace std;
 
 
-void TrieTree::add_words(vector<string> &words, bool if_reverse=false){
+void TrieTree::add_words(vector<string> &words){
     for (int i=0; i<words.size(); i++){
         try {
             string seg = words[i];
             vector<string> segment = cut(seg);
-            if (if_reverse){
-                reverse(segment.begin(), segment.end());
-            }
+            
+            reverse(segment.begin(), segment.end());
+            
             Node* root = proot;
             string tmp = "";
             for (int i=0; i<segment.size(); i++){
                 string word = segment[i];
                 tmp += segment[i];
-                if (root->child[word]==0){
+                if (root->child[word]==NULL){
                     node_nums++;
                     index ++;
                     root->child[word] = new Node();
@@ -48,7 +48,7 @@ void TrieTree::add_words(vector<string> &words, bool if_reverse=false){
             }
             root->is_end = true;
             root->segment = tmp;
-            //cout << float(i) /words.size()*100 << endl;
+            cout << float(i) /words.size()*100 << endl;
         } catch (exception &e){
             continue;
         }

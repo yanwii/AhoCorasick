@@ -28,8 +28,7 @@ class AhoCorasick:public TrieTree{
                 //cout << "word " << word << " state " << node->state;
                 //cout << " parent_word " << parent_state << endl;
                 int state = node->state;
-                
-                /*
+
                 if (node->depth==1){
                     failure[state] = proot;
                     continue;
@@ -42,7 +41,7 @@ class AhoCorasick:public TrieTree{
                 } else {
                     failure[state] = proot;
                 }
-                */
+                cout << queue.size() << endl;
             }
         }
     }
@@ -98,7 +97,7 @@ int main(){
     
     time_t start,stop;
     start = time(NULL);
-    ac.add_words(words, true);
+    ac.add_words(words);
     stop = time(NULL);
     cout << stop - start << endl;
 
