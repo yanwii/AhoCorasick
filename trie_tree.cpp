@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void TrieTree::add_words(vector<string> &words, bool if_reverse){
+void TrieTree::add_words(vector<string> &words, bool if_reverse=false){
     /*
     Add words to Trie Tree
 

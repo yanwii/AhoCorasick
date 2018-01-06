@@ -116,7 +116,7 @@ class AhoCorasick:public TrieTree{
                     Node* parent_failure_node = failure[parent_state];
                     if (parent_failure_node->child[word]!=NULL){
                         failure[state] = parent_failure_node->child[word];
-                        cout << state << " failure state " << parent_failure_node->child[word]->state << endl;
+                        //cout << state << " failure state " << parent_failure_node->child[word]->state << endl;
                     } else {
                         failure[state] = proot;
                     }
