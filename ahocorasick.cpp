@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <exception>
 #include <time.h>
+#include <algorithm>
+#include <queue>
 #include "trie_tree.h"
 #include "utils.h"
 
@@ -13,28 +15,28 @@ class AhoCorasick:public TrieTree{
     time_t start,stop;
 
     void make_ac(){
-        vector<Node*> queue;
+        queue<Node *> q;
         Node* root = proot;
         Node* parent_failure_node;
-        queue.push_back(root);
+        q.push(root);
         
-        while(!queue.empty()){
-            root = pop_back(queue);
+        while(!q.empty()){
+            //root = pop_back(queue);
+            root = q.front();
+            q.pop();
             int parent_state = root->state;
             for (auto it=root->child.begin(); it!=root->child.end();it++){
                 string word = it->first;
                 Node* node = it->second;
-                queue.push_back(node);
+                q.push(node);
                 //cout << "word " << word << " state " << node->state;
                 //cout << " parent_word " << parent_state << endl;
                 int state = node->state;
                 
-                /*
                 if (node->depth==1){
                     failure[state] = proot;
                     continue;
                 }
-
                 parent_failure_node = failure[parent_state];
                 if (parent_failure_node->child[word]!=NULL){
                     failure[state] = parent_failure_node->child[word];
@@ -42,7 +44,6 @@ class AhoCorasick:public TrieTree{
                 } else {
                     failure[state] = proot;
                 }
-                */
             }
         }
     }
@@ -108,7 +109,8 @@ int main(){
     stop = time(NULL);
     cout << stop - start << endl;
 
-    vector<string> inputs = cut("江苏力博医药生物技术股份有限公司北京慧博云通科技股份有限公司北京金诺佳音国际文化传媒股份公司");
+    vector<string> inputs = cut("石家庄福华房地产开发有限公司");
+    reverse(inputs.begin(), inputs.end());
     ac.search(inputs);
     char str1[10], str2[10];
     cin>>str1;
