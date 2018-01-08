@@ -1,6 +1,1 @@
-g++ -std=c++11 -c trie_tree.cpp
-g++ -std=c++11 -c utils.cpp
-g++ -std=c++11 -c ahocorasick.cpp
-g++ -std=c++11 -o main ahocorasick.o trie_tree.o utils.o
-
-rm *.o
+g++ -std=c++11 -shared -o ahocorasick.so -fPIC -I/usr/include/python2.7 wrapper.cpp trie_tree.cpp ahocorasick.cpp utils.cpp -lpython2.7 -lboost_python -lboost_thread -lboost_system

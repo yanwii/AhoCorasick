@@ -21,8 +21,7 @@ void TrieTree::add_words(vector<string> &words, bool if_reverse=false){
     vector<string> seg;
     for (int i=0; i < words.size(); i++){
         try{
-            seg = cut(words[i], if_reverse);
-            add_word(seg);
+            add_word(words[i], if_reverse);
         } catch (exception &e){
             continue;
         }
@@ -30,7 +29,7 @@ void TrieTree::add_words(vector<string> &words, bool if_reverse=false){
 }
 
 
-void TrieTree::add_word(vector<string> &words){
+void TrieTree::add_word(string word, bool if_reverse){
     /*
     Add word to Trie Tree
 
@@ -41,6 +40,8 @@ void TrieTree::add_word(vector<string> &words){
                     if reverse the segment
     */
     try {
+        vector<string> words = cut(word, if_reverse);
+
         //root node
         Node* root = proot; 
         string tmp = "";
