@@ -23,6 +23,7 @@ class TrieTree{
     }
     Node* proot;
     int node_nums=0;
+    unordered_map <string, int> vocab;
     public:
     void add_words(vector<string> &word, bool);
     void add_word(string word, bool=false);

@@ -15,6 +15,7 @@ void    (AhoCorasick::*search2)(string, bool) = &AhoCorasick::search;
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(search_overloads, search, 1, 2)
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(add_word_overloads, add_word, 1, 2)
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(insert_overloads, insert, 1, 2)
 BOOST_PYTHON_MODULE(ahocorasick)
 {   
     class_<TrieTree>("TrieTree")
@@ -22,14 +23,11 @@ BOOST_PYTHON_MODULE(ahocorasick)
         .def("add_word", &TrieTree::add_word, add_word_overloads());
     
     class_<AhoCorasick, bases<TrieTree>>("AhoCorasick")
-        .def("insert", &AhoCorasick::insert)
+        .def("insert", &AhoCorasick::insert, insert_overloads())
         .def("make_ac", &AhoCorasick::make_ac)
         .def("search", search1)
         .def("search", search2, search_overloads())
         .def("search_", &AhoCorasick::search_);
-    
-
-
 }
 
 
