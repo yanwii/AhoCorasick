@@ -31,4 +31,5 @@
         "string_view": "cpp",
         "valarray": "cpp"
     },
+    "git.ignoreLimitWarning": true,
 }
