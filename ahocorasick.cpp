@@ -15,7 +15,7 @@ void AhoCorasick::make_ac(){
     Node* root = proot;
     Node* parent_failure_node;
     q.push_back(root);
-    
+
     while(!q.empty()){
         //root = pop_back(queue);
         root = q.front();
@@ -44,9 +44,18 @@ void AhoCorasick::make_ac(){
     }
 }
 
+//void AhoCorasick::search(string text){
+//    search(text, false);
+//}
+
 void AhoCorasick::search(string text, bool if_reverse){
     vector<string> segment = cut(text, if_reverse);
     search_(segment);
+}
+
+
+void AhoCorasick::search(vector<string> segements){
+    cout << &segements << endl;
 }
 
 void AhoCorasick::search_(vector<string> &segments){

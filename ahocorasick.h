@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "trie_tree.h"
+
 using namespace std;
 
 class AhoCorasick: public TrieTree {
@@ -12,7 +13,9 @@ class AhoCorasick: public TrieTree {
     void insert(string word, bool if_reverse);
     void checkout(Node* &root, unordered_map<string, string> &result,const int &stop);
     void search_(vector<string> &segments);
-    void search(string text, bool if_revers);
+    //void search(string text);
+    void search(string text, bool if_reverse=false);
+    void search(vector<string> segments);
     void make_ac();
 };
 #endif

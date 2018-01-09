@@ -25,7 +25,7 @@ class TrieTree{
     int node_nums=0;
     public:
     void add_words(vector<string> &word, bool);
-    void add_word(string word, bool);
+    void add_word(string word, bool=false);
 };
 
 

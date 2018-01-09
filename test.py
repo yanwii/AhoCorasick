@@ -2,6 +2,6 @@
 import ahocorasick
 
 ac = ahocorasick.AhoCorasick()
-ac.add_word("he", True)
+ac.add_word("he")
 ac.make_ac()
-ac.search("sdfhes", True)
+ac.search("sdfhes")
