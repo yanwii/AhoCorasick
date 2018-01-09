@@ -3,11 +3,7 @@
 #include <algorithm>
 #include <fstream>
 #include "utils.h"
-#include <boost/shared_ptr.hpp>
-#include <boost/python.hpp>
-#include <boost/python/stl_iterator.hpp>
 using namespace std;
-using namespace boost::python;
 
 vector<string> cut(const string &word, bool if_reverse=false){
     vector<string> segments;

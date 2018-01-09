@@ -22,7 +22,7 @@ void AhoCorasick::make_ac(){
         q.pop_front();
         int parent_state = root->state;
         for (auto it=root->child.begin(); it!=root->child.end();it++){
-            string word = it->first;
+            int word_to_int = it->first;
             Node* node = it->second;
             q.push_back(node);
             //cout << "word " << word << " state " << node->state;
@@ -34,8 +34,8 @@ void AhoCorasick::make_ac(){
                 continue;
             }
             parent_failure_node = failure[parent_state];
-            if (parent_failure_node->child[word]!=NULL){
-                failure[state] = parent_failure_node->child[word];
+            if (parent_failure_node->child[word_to_int]!=NULL){
+                failure[state] = parent_failure_node->child[word_to_int];
                 //cout << state << " failure state " << parent_failure_node->child[word]->state << endl;
             } else {
                 failure[state] = proot;
@@ -63,10 +63,16 @@ void AhoCorasick::search_(vector<string> &segments){
     Node* root = proot;
     for (int i=0 ; i < segments.size(); i++){
         string seg = segments[i];
+        int word_to_int;
+        if (vocab[seg]==0){
+            word_to_int = -1;
+        } else {
+            word_to_int = vocab[seg];
+        }
         //cout << seg << endl;
         //cout << root->state << endl;
         //cout << root->is_end << endl;
-        if (root->child[seg]==NULL){
+        if (root->child[word_to_int]==NULL){
             if (root->state==0){
                 root = proot;
                 continue;
@@ -76,7 +82,7 @@ void AhoCorasick::search_(vector<string> &segments){
                 i--;
             }
         } else {
-            root = root->child[seg];
+            root = root->child[word_to_int];
             checkout(root, result, i+1);
         }
         //
@@ -104,29 +110,35 @@ void AhoCorasick::insert(string word, bool if_reverse){
         for (int i=0; i<segment.size(); i++){
             string word = segment[i];
             tmp += word;
-            if (root->child[word]==NULL){
+            if (vocab[word]==0){
+                vocab[word] = vocab.size()+1;
+            }
+            int word_to_int = vocab[word];
+
+
+            if (root->child[word_to_int]==NULL){
                 node_nums ++;
-                root->child[word] = new Node();
-                root->child[word]->word = word;
-                root->child[word]->state = node_nums;
-                root->child[word]->depth = i+1;
+                root->child[word_to_int] = new Node();
+                root->child[word_to_int]->word = word;
+                root->child[word_to_int]->state = node_nums;
+                root->child[word_to_int]->depth = i+1;
             }
             
-            int depth = root->child[word]->depth;
-            int state = root->child[word]->state;
+            int depth = root->child[word_to_int]->depth;
+            int state = root->child[word_to_int]->state;
             if (depth<=1){
-                failure[root->child[word]->state] = proot;
+                failure[root->child[word_to_int]->state] = proot;
             } else {
                 int parent_state = root->state;
                 Node* parent_failure_node = failure[parent_state];
-                if (parent_failure_node->child[word]!=NULL){
-                    failure[state] = parent_failure_node->child[word];
+                if (parent_failure_node->child[word_to_int]!=NULL){
+                    failure[state] = parent_failure_node->child[word_to_int];
                     //cout << state << " failure state " << parent_failure_node->child[word]->state << endl;
                 } else {
                     failure[state] = proot;
                 }
             }
-            root = root->child[word];
+            root = root->child[word_to_int];
         }
         root->is_end = true;
         root->segment = tmp;
@@ -144,7 +156,7 @@ int main(){
     
     time_t start,stop;
     start = time(NULL);
-    ac.add_words(words, true);
+    ac.add_words(words);
     stop = time(NULL);
     cout << "make trie tree cost: "<< stop - start << endl;
 
@@ -152,15 +164,6 @@ int main(){
     ac.make_ac();
     stop = time(NULL);
     cout << "make failure tree cost: " << stop - start << endl;
-
-    vector<string> inputs = cut("石家庄福华房地产开发有限公司", true);
-    ac.search_(inputs);
-
-
-    ac.insert("阿里巴巴", true);
-    inputs = cut("阿里巴巴", true);
-    ac.search_(inputs);
-
 
     char str1[10], str2[10];
     cin>>str1;

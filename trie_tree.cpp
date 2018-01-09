@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void TrieTree::add_words(vector<string> &words, bool if_reverse=false){
+void TrieTree::add_words(vector<string> &words, bool if_reverse){
     /*
     Add words to Trie Tree
 
@@ -49,19 +49,24 @@ void TrieTree::add_word(string word, bool if_reverse){
         //reverse
         for (int i=0; i<words.size(); i++){
             string word = words[i];
+            if (vocab[word]==0){
+                vocab[word] = vocab.size()+1;
+            }
+            int word_to_int = vocab[word];
+
             tmp += words[i];
             // check if the node exist
-            if (root->child[word]==NULL){
+            if (root->child[word_to_int]==NULL){
                 // if not exist
                 // add new node
                 node_nums++;
-                root->child[word] = new Node();
-                root->child[word]->word = word;
-                root->child[word]->state = node_nums;
-                root->child[word]->depth = i+1;
+                root->child[word_to_int] = new Node();
+                root->child[word_to_int]->word = word;
+                root->child[word_to_int]->state = node_nums;
+                root->child[word_to_int]->depth = i+1;
             };
             // goto child node
-            root = root->child[word];
+            root = root->child[word_to_int];
         }
         root->is_end = true;
         root->segment = tmp;

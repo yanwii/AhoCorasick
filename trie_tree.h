@@ -9,7 +9,7 @@ using namespace std;
 typedef struct ChildNode{
     public:
     string word;
-    unordered_map<string, ChildNode*> child;
+    unordered_map<int, ChildNode*> child;
     int state=0;
     int depth;
     bool is_end = false;
@@ -25,7 +25,7 @@ class TrieTree{
     int node_nums=0;
     unordered_map <string, int> vocab;
     public:
-    void add_words(vector<string> &word, bool);
+    void add_words(vector<string> &word, bool=false);
     void add_word(string word, bool=false);
 };
 
