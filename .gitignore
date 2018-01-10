@@ -33,3 +33,4 @@
 .vscode
 test.txt
 *.tar
+*.vscode
