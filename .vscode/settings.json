@@ -29,7 +29,8 @@
         "unordered_map": "cpp",
         "*.ipp": "cpp",
         "string_view": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "functional": "cpp"
     },
     "git.ignoreLimitWarning": true,
 }
