@@ -50,9 +50,9 @@ void AhoCorasick::make_ac(){
 
 vector<string> AhoCorasick::search(string text, bool if_reverse){
     vector<string> segment = cut(text, if_reverse);
-    search_(segment);
+    return search_(segment);
+    
 }
-
 
 vector<string> AhoCorasick::search(vector<string> segements){
     cout << &segements << endl;
