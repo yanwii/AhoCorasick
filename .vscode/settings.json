@@ -30,7 +30,8 @@
         "*.ipp": "cpp",
         "string_view": "cpp",
         "valarray": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "bitset": "cpp"
     },
     "git.ignoreLimitWarning": true,
 }

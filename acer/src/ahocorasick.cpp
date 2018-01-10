@@ -72,7 +72,7 @@ vector<string> AhoCorasick::search_(vector<string> &segments){
                 continue;
             } else {
                 root = failure[root->state];
-                checkout(root, result, i+1);
+                checkout(root, result, i);
                 i--;
             }
         } else {
