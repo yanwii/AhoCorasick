@@ -48,18 +48,18 @@ void AhoCorasick::make_ac(){
 //    search(text, false);
 //}
 
-void AhoCorasick::search(string text, bool if_reverse){
+vector<string> AhoCorasick::search(string text, bool if_reverse){
     vector<string> segment = cut(text, if_reverse);
     search_(segment);
 }
 
 
-void AhoCorasick::search(vector<string> segements){
+vector<string> AhoCorasick::search(vector<string> segements){
     cout << &segements << endl;
 }
 
-void AhoCorasick::search_(vector<string> &segments){
-    unordered_map<string, string> result;
+vector<string> AhoCorasick::search_(vector<string> &segments){
+    vector<string> result;
     Node* root = proot;
     for (int i=0 ; i < segments.size(); i++){
         string seg = segments[i];
@@ -81,17 +81,15 @@ void AhoCorasick::search_(vector<string> &segments){
         }
         //
     }
-    for (auto it=result.begin(); it!=result.end(); it++){
-        cout << "from_to " << it->first << " word " << it->second << endl;
-    }
+    return result;
 }
 
-void AhoCorasick::checkout(Node* &root, unordered_map<string, string> &result,const int &stop){
+void AhoCorasick::checkout(Node* &root, vector<string> &result,const int &stop){
     if (root->is_end){
         string text = root->segment;
         int start = stop - cut(text, true).size();
         string from_to = to_string(start) + "_" + to_string(stop);
-        result[from_to] = text;
+        result.push_back(from_to);
     }            
 }
 

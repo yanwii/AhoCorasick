@@ -11,11 +11,11 @@ class AhoCorasick: public TrieTree {
     time_t start,stop;
     public:
     void insert(string word, bool if_reverse=false);
-    void checkout(Node* &root, unordered_map<string, string> &result,const int &stop);
-    void search_(vector<string> &segments);
+    void checkout(Node* &root, vector<string> &result,const int &stop);
+    vector<string> search_(vector<string> &segments);
     //void search(string text);
-    void search(string text, bool if_reverse=false);
-    void search(vector<string> segments);
+    vector<string> search(string text, bool if_reverse=false);
+    vector<string> search(vector<string> segments);
     void make_ac();
 };
 #endif

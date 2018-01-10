@@ -1,1 +1,1 @@
-g++ -std=c++11  -shared -o ahocorasick.so -fPIC -I/usr/include/python2.7 acer.cpp trie_tree.cpp ahocorasick.cpp utils.cpp -lpython2.7 -lboost_python -lboost_thread -lboost_system
+g++ -std=c++11  -shared -o acer.so -fPIC -I/usr/include/python2.7 acer.cpp trie_tree.cpp ahocorasick.cpp utils.cpp -lpython2.7 -lboost_python -lboost_thread -lboost_system
