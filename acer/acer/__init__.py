@@ -29,7 +29,6 @@ class Acer:
                 word = sentence[begin:end]
                 real_result.append({"begin":begin, "end":end, "word":word.encode("utf-8")})
         except Exception,e:
-            print e
             pass
         return real_result
         

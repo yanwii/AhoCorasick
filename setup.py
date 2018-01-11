@@ -13,7 +13,7 @@ extension_mod = Extension("acer.acer",
                         extra_compile_args=['-std=c++11'])
 
 setup(name='acer',
-      version='0.2.2',
+      version='0.4',
       keywords = ("AhoCorasick", "Aho-Corasick", "Entities matching"),  
       description = "Aho-Corasick algorithm C++ version for python",  
       long_description = "Aho-Corasick by Paper:https://pdfs.semanticscholar.org/3547/ac839d02f6efe3f6f76a8289738a22528442.pdf \
