@@ -28,9 +28,9 @@ It is a kind of dictionary-matching algorithm that locates elements of a finite 
 
 
 ### NOTICE
-After you making the failure tree, if you insert a word into trie tree, the failure tree could be imcomplete because the first char of new word could be the failure state of a word which already exist.  
+After making the failure tree, if you insert a word into trie tree, the failure tree could be imcomplete because the first char of new word could be the failure state of a word which already exist.  
 Such as:  
 Add the word "add" first, and then make failure tree  
 Now insert the "desert", the char "d" in "desert" should have been the failure state of "d" in "add", but it's not work because of the order.  
 
-So, after you insert a word, re-making failure tree will be recommended.  
+So, after inserting a word, re-making failure tree will be recommended.  
